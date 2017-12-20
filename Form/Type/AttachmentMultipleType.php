@@ -3,13 +3,13 @@
 namespace Akuma\Bundle\CoenFileBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AttachmentCollectionType extends AbstractType
+class AttachmentMultipleType extends AbstractType
 {
-    const NAME = 'coen_attachment_collection';
+    const NAME = 'coen_attachment_multiple';
 
     /** @var string */
     protected $dataClass;
@@ -19,14 +19,24 @@ class AttachmentCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('files', CollectionType::class, [
-            'entry_type'   => AttachmentType::class,
-            'allow_add' => true,
-            'prototype' => true,
-            'attr'         => [
-                'class' => "files-collection",
-            ],
-        ]);
+        parent::buildForm($builder, $options);
+        $builder->add('files', FileType::class, ['multiple' => true]);
+    }
+
+    /**
+     * @param string $dataClass
+     */
+    public function setDataClass($dataClass)
+    {
+        $this->dataClass = $dataClass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataClass()
+    {
+        return $this->dataClass;
     }
 
     /**
@@ -51,5 +61,8 @@ class AttachmentCollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
+        $resolver->setDefaults([
+            'data_class' => $this->dataClass,
+        ]);
     }
 }

@@ -11,10 +11,18 @@ services:
             - { name: form.type, alias: coen_attachment }
 
     akuma_coen_file.form_type.attachement_collection:
-        class: '\Akuma\Bundle\CoenFileBundle\Form\Type\AttachmentCollectionType'
+        class: 'Akuma\Bundle\CoenFileBundle\Form\Type\AttachmentCollectionType'
         arguments: ['@doctrine']
         tags:
             - { name: form.type, alias: coen_attachment_collection }
+
+    akuma_coen_file.form_type.coen_attachment_multiple:
+        class: 'Akuma\Bundle\CoenFileBundle\Form\Type\AttachmentMultipleType'
+        arguments: ['@doctrine']
+        tags:
+            - { name: form.type, alias: coen_attachment_multiple }
+        calls:
+            - ['setDataClass', ['Akuma\Bundle\CoenFileBundle\Model\MultipleAttachment']]
 
     akuma_coen_file.orm_listener.attachement:
         class: 'Akuma\Bundle\CoenFileBundle\Listener\AttachmentListener'

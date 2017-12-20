@@ -216,18 +216,16 @@ class Attachment
     {
         $this->file = $file;
 
-        if($file instanceof UploadedFile){
+        if ($file instanceof UploadedFile) {
             $this
                 ->setExtension($file->guessClientExtension())
                 ->setMimeType($file->getClientMimeType())
                 ->setOriginalFilename($file->getClientOriginalName());
-        }else{
+        } else {
             $this
                 ->setExtension($file->guessExtension())
                 ->setMimeType($file->getMimeType())
-                ->setOriginalFilename($file->getFilename())
-            ;
-
+                ->setOriginalFilename($file->getFilename());
         }
 
         return $this;
