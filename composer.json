@@ -1,0 +1,28 @@
+{
+  "name": "akuma/coen-uploader-bundle",
+  "type": "symfony-bundle",
+  "homepage": "",
+  "license": "WTFPL",
+  "authors": [
+    {
+      "name": "Nikita Makarov",
+      "email": "mesaverde228@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.5.9",
+    "symfony/symfony": ">=2.8.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "Akuma\\Bundle\\CoenFileBundle": ""
+    }
+  },
+  "target-dir": "Akuma/Bundle/CoenFileBundle",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}

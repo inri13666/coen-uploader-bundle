@@ -1,0 +1,24 @@
+services:
+    akuma_coen_file.manager.attachement:
+        class: 'Akuma\Bundle\CoenFileBundle\Manager\AttachmentManager'
+
+    akuma_coen_file.form_type.attachement:
+        class: 'Akuma\Bundle\CoenFileBundle\Form\Type\AttachmentType'
+        arguments: ['@doctrine']
+        calls:
+            - ['setDataClass', ['Akuma\Bundle\CoenFileBundle\Entity\Attachment']]
+        tags:
+            - { name: form.type, alias: coen_attachment }
+
+    akuma_coen_file.form_type.attachement_collection:
+        class: '\Akuma\Bundle\CoenFileBundle\Form\Type\AttachmentCollectionType'
+        arguments: ['@doctrine']
+        tags:
+            - { name: form.type, alias: coen_attachment_collection }
+
+    akuma_coen_file.orm_listener.attachement:
+        class: 'Akuma\Bundle\CoenFileBundle\Listener\AttachmentListener'
+        arguments: ['@akuma_coen_file.manager.attachement']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
